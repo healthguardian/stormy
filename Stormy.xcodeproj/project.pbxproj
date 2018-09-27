@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02C5B48C215D5C3500FAC500 /* CurrentWeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C5B48B215D5C3500FAC500 /* CurrentWeatherViewModel.swift */; };
 		972470AF20A27F0000050DF7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972470AE20A27F0000050DF7 /* AppDelegate.swift */; };
 		972470B120A27F0000050DF7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972470B020A27F0000050DF7 /* ViewController.swift */; };
 		972470B420A27F0000050DF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 972470B220A27F0000050DF7 /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		02C5B48B215D5C3500FAC500 /* CurrentWeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherViewModel.swift; sourceTree = "<group>"; };
 		972470AB20A27F0000050DF7 /* Stormy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stormy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		972470AE20A27F0000050DF7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		972470B020A27F0000050DF7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				972470B720A27F0100050DF7 /* LaunchScreen.storyboard */,
 				972470BA20A27F0100050DF7 /* Info.plist */,
 				BE45702220A326B4001FE65B /* CurrentWeather.swift */,
+				02C5B48B215D5C3500FAC500 /* CurrentWeatherViewModel.swift */,
 			);
 			path = Stormy;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 				972470B120A27F0000050DF7 /* ViewController.swift in Sources */,
 				BE45702320A326B4001FE65B /* CurrentWeather.swift in Sources */,
 				972470AF20A27F0000050DF7 /* AppDelegate.swift in Sources */,
+				02C5B48C215D5C3500FAC500 /* CurrentWeatherViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
