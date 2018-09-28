@@ -9,19 +9,20 @@
 import Foundation
 
 class DarkSkyAPIClient {
-    fileprivate let darkSkyAPIKey = "522ffbddef15de9b7932b5c0d35bcbc4"
+    fileprivate let darkSkyApiKey = "b853321513ee430a225b12b5f02b8dd7"
     
-    lazy var baseURL: URL = {
-        return URL(string: "https://api.darksky.net/forecast/\(self.darkSkyAPIKey)/")!
+    lazy var baseUrl: URL = {
+        return URL(string: "https://api.darksky.net/forecast/\(self.darkSkyApiKey)/")!
     }()
     
     let downloader = JSONDownloader()
     
+    typealias WeatherCompletionHandler = (Weather?, DarkSkyError?) -> Void
     typealias CurrentWeatherCompletionHandler = (CurrentWeather?, DarkSkyError?) -> Void
     
-    func getCurrentWeather(at coordinate: Coordinate, completionHandler completion: @escaping CurrentWeatherCompletionHandler) {
+    private func getWeather(at coordinate: Coordinate, completionHandler completion: @escaping WeatherCompletionHandler) {
         
-        guard let url = URL(string: coordinate.description, relativeTo: baseURL) else {
+        guard let url = URL(string: coordinate.description, relativeTo: baseUrl) else {
             completion(nil, .invalidURL)
             return
         }
@@ -29,7 +30,52 @@ class DarkSkyAPIClient {
         let request = URLRequest(url: url)
         
         let task = downloader.jsonTask(with: request) { json, error in
-            
+            DispatchQueue.main.async {
+                guard let json = json else {
+                    completion(nil, error)
+                    return
+                }
+                
+                guard let weather = Weather(json: json) else {
+                    completion(nil, .jsonParsingFailed)
+                    return
+                }
+                
+                completion(weather, nil)
+            }
+        }
+        
+        task.resume()
+    }
+    
+    func getCurrentWeather(at coordinate: Coordinate, completionHandler completion: @escaping CurrentWeatherCompletionHandler) {
+        getWeather(at: coordinate) { weather, error in
+            completion(weather?.currently, error)
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

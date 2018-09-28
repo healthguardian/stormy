@@ -18,29 +18,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    fileprivate let darkSkyAPIKey = "522ffbddef15de9b7932b5c0d35bcbc4"
+    let client = DarkSkyAPIClient()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let base = URL(string: "https://api.darksky.net/forecast/\(darkSkyAPIKey)/")
-        guard let forecastURL = URL(string: "6.2002375,-75.5730763", relativeTo: base) else {
-            return
+        client.getCurrentWeather(at: Coordinate.medellin) { currentWeather, error in
+            print(currentWeather)
+            print(error)
         }
         
-        let request = URLRequest(url: forecastURL)
-        let session = URLSession(configuration: .default)
-        
-        let dataTask = session.dataTask(with: request) { data, response, error in
-            print(data)
-        }
-        
-        dataTask.resume()
-        
-        let currentWeather = CurrentWeather(temperature: 85.0, humidity: 0.8, precipProbability: 0.1, summary: "Hot!", icon: "clear-day")
-        let viewModel = CurrentWeatherViewModel(model: currentWeather)
-        
-        displayWeather(using: viewModel)
     }
     
     func displayWeather(using viewModel: CurrentWeatherViewModel) {
