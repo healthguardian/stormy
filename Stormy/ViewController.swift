@@ -23,11 +23,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        client.getCurrentWeather(at: Coordinate.medellin) { currentWeather, error in
-            print(currentWeather)
-            print(error)
+        client.getCurrentWeather(at: Coordinate.alcatrazIsland) { [unowned self] currentWeather, error in
+            if let currentWeather = currentWeather {
+                let viewModel = CurrentWeatherViewModel(model: currentWeather)
+                self.displayWeather(using: viewModel)
+            }
         }
-        
     }
     
     func displayWeather(using viewModel: CurrentWeatherViewModel) {
